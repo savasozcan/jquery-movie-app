@@ -1,0 +1,256 @@
+html{
+    background: #000;
+}
+
+.navbar{
+    background: #000;
+    text-align: center;
+    position: sticky;
+    border: solid 1px rgba(255, 255, 255, 0.315);
+}
+
+.navbar-item{
+    font-size: 2em;
+    font-family: 'Unica One', cursive;
+}
+
+a.navbar-item {
+   color: #fff; 
+   transition: 0.2s;
+}
+
+.navbar-brand a:hover{
+    color: rgb(255, 238, 0);
+    content: "Enjoy!"
+}
+
+a.omdb{
+    font-size: 1em;
+    font-family: 'Special Elite', cursive;
+    color: #fff;
+}
+
+.hero{
+    width: 80vw;
+    margin: 5vh auto auto auto;
+}
+
+.panel-heading{
+    background: #000;
+    color: #fff;
+    font-family: 'Unica One', cursive;
+    text-align: center;
+}
+
+.panel-block{
+    background: #000; 
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#searchForm {
+    margin: auto;
+    padding: 5vh;
+}
+
+input{
+    width: 50vw!important;
+} 
+
+.container{
+    width: 80vw!important;
+}
+
+
+
+.movie-title{
+    font-size: 0.90em;
+}
+
+.box{
+    text-align: center;
+    min-height: 70vh;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1em;
+}
+
+.box h5, a{
+    padding: 15px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px white inset !important;
+}
+
+.modal{
+    display: block;  
+}
+
+.modal-card{
+    margin-top: 10.5%;
+    margin-top: 20px!important;
+    margin: auto;  
+}
+
+.metadata{
+    font-weight: 600;
+    padding: 5px;
+}
+
+.modal-img {
+    width: 65%;
+    margin-left: 17.5%;
+}
+
+#progress-container {
+    text-align: center;
+    width: 100%;
+  }
+  .progress {
+    background-color: gray;
+    width: 400px;
+    height: 20px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  
+  .progress, .status {
+    border-radius: 10px;
+  }
+  
+  .status {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 1em gold;
+    background-color: #F00;
+    z-index: 2;
+    -webkit-transition: all 1.2s linear;
+    -moz-transition: all 1.2s linear;
+    -o-transition: all 1.2s linear;
+    transition: all 1.2s linear;
+  }
+
+.none .status { 
+width: 0%;
+background-color: red; 
+}
+
+.fifty .status {
+width: 50%;
+background-color: yellow;
+}
+
+.one-hundred .status{ 
+width: 100%;
+box-shadow: inset 0 0 1em #4C6600;
+background-color: #8AE62E;
+}
+
+#imdb{
+    width: 8%;
+    position: relative;
+    top: 7px;
+}
+
+.rating {
+    display: block;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.title {
+    display: block;
+    text-align: center;
+}
+
+.modal-card-foot{
+    display: block;
+    text-align: left;
+    font-size: 0.85em;
+}
+
+.modal-card-title{
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.25em;
+}
+
+.modal-card-body{
+    font-size: 0.85em;
+    height: 80vh;
+}
+
+
+@media  screen and (max-width: 800px){
+
+    html{
+        background: #000!important;
+    }
+
+    .modal-card-title{
+        font-size: 1.25em;
+    }
+
+    #imdb{
+        width: 11%;
+        position: relative;
+        top: 3px;
+    }
+
+    .modal-card{
+        width: 70vw;
+    }
+}
+
+
+@media  screen and (max-width: 600px){
+
+    html{
+        background: #000!important;
+    }
+
+    .modal-card-title{
+        font-size: 1em;
+        
+    }
+
+    #imdb{
+        width: 15%;
+        position: relative;
+        top: 3px; 
+    }
+
+    .modal-card{
+        width: 80vw;
+    }
+
+    .modal-card-body {
+        font-size: 0.7em;
+    }
+
+   .modal-card-foot{
+    font-size: 0.7em;
+   }
+
+   form{
+       padding: 0!important;
+   }
+
+   .hero, .hero-body{
+       padding: 0;
+       margin-bottom: 10px;
+      
+   }
+   .panel-heading{
+       padding: 3px;
+   }
+
+}

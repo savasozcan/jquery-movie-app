@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"
+        integrity="sha256-2pUeJf+y0ltRPSbKOeJh09ipQFYxUdct5nTY6GAXswA=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container-fluid">
+        <nav class="navbar " role="navigation" aria-label="main mavigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="index.html">
+                    <i class="fas fa-film animated bounce">&nbsp;</i>MovieSearch
+                </a>
+            </div>
+        </nav>
+        <section class="hero animated ">
+            <div class="hero-body ">
+                <p class="panel-heading">Search</p>
+                <div class="panel-block">
+                    <form id="searchForm" autocomplete="off">
+                        <div class="control has-icons-left  ">
+                            <input type="text" class="input is-rounded" id="searchText" placeholder="Search Movies....">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <div class="container">
+            <div id="movies" class="columns is-multiline is-mobile"></div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

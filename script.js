@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    $("#searchForm").on('submit', e => {
+        $("#searchForm").on('submit', e => {
         
         let searchVal = $("#searchText").val();
         getMovies(searchVal)
@@ -7,6 +7,31 @@ $(document).ready(() => {
         e.preventDefault();
     })
 });
+
+const input = document.getElementById("searchText")
+const form = document.getElementById("searchForm")
+const list = document.getElementById("list")
+const home = document.getElementById("home")
+const movieList = document.getElementById("movies")
+const movieListText = document.getElementById("movie-text")
+const movieItem = document.getElementsByClassName("movie-item")
+let items
+
+loadItems();
+
+eventListeners();
+
+function eventListeners() {
+    home.addEventListener("click", addListItem)
+    list.addEventListener("click", deleteItem)
+}
+
+function loadItems() {
+    items = getItemFromLS();
+    items.forEach(function(item) {
+        createItem(item)
+    })
+}
 
 function getMovies(searchVal) {
     axios.get("http://www.omdbapi.com?s=" + searchVal + "&apikey=63f944af")
@@ -21,7 +46,7 @@ function getMovies(searchVal) {
                     <div class="row">
                         <img class="movie-img" src="${movie.Poster}" alt="">
                         <h5 class="movie-title">${movie.Title}</h5>
-                        <button onclick="selectMovie('${movie.imdbID}')" class="button" id="#show-modal" href="#">Movie Info</button>
+                        <button onclick="selectMovie('${movie.imdbID}')" class="info-btn" id="#show-modal" href="#">Movie Info</button>
                     </div>
                 </div>
             `;
@@ -93,7 +118,78 @@ function selectMovie(id) {
     })
 };
 
+function getItemFromLS() {
+    if(localStorage.getItem('items') === null) {
+        items = [];
+    }else {
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+    
+    return items;
 
+}
+
+function setItemToLS(movie) {
+    items = getItemFromLS();
+    items.push(movie);
+    localStorage.setItem('items', JSON.stringify(items))
+}
+
+function deleteItemFromLS(text) {
+    items.getItemFromLS();
+    items.forEach(function(item, index) {
+        if(item == text) {
+            items.splice(index, 1)
+        }
+    });
+
+    localStorage.setItem('items', JSON.stringify(items))
+
+}
+
+function createItem(text) {
+    var htmlList = `
+        <li class="movie-item">
+            ${text}
+            <a href="#" class="delete-item float-right">
+                <i class="fas fa-times"></i>
+            </a>
+        </li>
+    `;
+
+    list.innerHTML += htmlList
+}
+
+function addListItem(e) {
+    // if(input.value === "") {
+    //     alert('Please enter a movie name')
+    //     return
+    // }
+
+    if(!(input.value === "")) {
+        createItem(input.value);
+
+        setItemToLS(input.value);
+
+        input.value = "";    
+        
+        movieListText.style.display = "block";
+        
+        movieList.innerHTML = ""
+        
+    }
+
+    e.preventDefault()
+}
+
+function deleteItem(e) {
+    if(e.target.className === 'movie-item') {
+        e.target.remove();
+        deleteItemFromLS(e.target.textContent)
+    }
+
+    e.preventDefault()
+}
 
 function closeModal() {
     $(".modal"). css("display", "none")

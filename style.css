@@ -11,7 +11,7 @@ html{
 
 .navbar-item{
     font-size: 2em;
-    font-family: 'Unica One', cursive;
+    font-family: 'Roboto', sans-serif;
 }
 
 a.navbar-item {
@@ -26,7 +26,7 @@ a.navbar-item {
 
 a.omdb{
     font-size: 1em;
-    font-family: 'Special Elite', cursive;
+    font-family: 'Roboto', sans-serif;
     color: #fff;
 }
 
@@ -38,8 +38,12 @@ a.omdb{
 .panel-heading{
     background: #000;
     color: #fff;
-    font-family: 'Unica One', cursive;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
+}
+
+.panel-heading, .panel-block {
+    border: none !important;
 }
 
 .panel-block{
@@ -61,16 +65,27 @@ input{
     width: 80vw!important;
 }
 
-
+.movie-container {
+    margin: 10px;
+}
 
 .movie-title{
-    font-size: 0.90em;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+}
+
+.info-btn {
+    border: none;
+    padding: 15px 20px;
+    border-radius: 5px;
+    margin: 5% 32%;
 }
 
 .box{
     text-align: center;
     min-height: 70vh;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1em;
 }
 
@@ -121,6 +136,16 @@ input:-webkit-autofill:active  {
   
   .progress, .status {
     border-radius: 10px;
+  }
+
+  .movie-item {
+      display: inline-block;
+      color: #fff;
+      font-weight: 700;
+  }
+
+  #movie-text {
+      display: none;
   }
   
   .status {
@@ -179,7 +204,7 @@ background-color: #8AE62E;
 
 .modal-card-title{
     text-align: center;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.25em;
 }
 

@@ -23,7 +23,7 @@ eventListeners();
 
 function eventListeners() {
     home.addEventListener("click", addListItem)
-    list.addEventListener("click", deleteItem)
+    movieItem[0].addEventListener("click", deleteItem)
 }
 
 function loadItems() {
@@ -136,7 +136,7 @@ function setItemToLS(movie) {
 }
 
 function deleteItemFromLS(text) {
-    items.getItemFromLS();
+    items = getItemFromLS();
     items.forEach(function(item, index) {
         if(item == text) {
             items.splice(index, 1)
@@ -184,12 +184,16 @@ function addListItem(e) {
 
 function deleteItem(e) {
     if(e.target.className === 'movie-item') {
+        console.log(e);
+        
         e.target.remove();
         deleteItemFromLS(e.target.textContent)
     }
 
     e.preventDefault()
 }
+
+
 
 function closeModal() {
     $(".modal"). css("display", "none")

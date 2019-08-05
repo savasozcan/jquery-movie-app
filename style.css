@@ -1,9 +1,9 @@
 html{
-    background: #000;
+    background-image: radial-gradient(#76aaf7, #2A7EFF);
 }
 
 .navbar{
-    background: #000;
+    background: #166016;
     text-align: center;
     position: sticky;
     border: solid 1px rgba(255, 255, 255, 0.315);
@@ -36,7 +36,7 @@ a.omdb{
 }
 
 .panel-heading{
-    background: #000;
+    background: transparent;
     color: #fff;
     font-family: 'Roboto', sans-serif;
     text-align: center;
@@ -47,9 +47,8 @@ a.omdb{
 }
 
 .panel-block{
-    background: #000; 
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    background: transparent; 
+    border-radius: 20px;
 }
 
 #searchForm {

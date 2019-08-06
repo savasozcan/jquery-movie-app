@@ -1,4 +1,5 @@
 $(document).ready(() => {
+
         $("#searchForm").on('submit', e => {
         
         let searchVal = $("#searchText").val();
@@ -7,14 +8,13 @@ $(document).ready(() => {
         e.preventDefault();
     })
 });
-
 const input = document.getElementById("searchText")
 const form = document.getElementById("searchForm")
 const list = document.getElementById("list")
 const home = document.getElementById("home")
 const movieList = document.getElementById("movies")
 const movieListText = document.getElementById("movie-text")
-const movieItem = document.getElementsByClassName("movie-item")
+const movieItem = [...document.getElementsByClassName("movie-item")]
 let items
 
 loadItems();
@@ -23,7 +23,7 @@ eventListeners();
 
 function eventListeners() {
     home.addEventListener("click", addListItem)
-    movieItem[0].addEventListener("click", deleteItem)
+    list.addEventListener('click', deleteItem);
 }
 
 function loadItems() {
@@ -33,6 +33,7 @@ function loadItems() {
     })
 }
 
+// api den filmleri çekmek
 function getMovies(searchVal) {
     axios.get("http://www.omdbapi.com?s=" + searchVal + "&apikey=63f944af")
     .then((response) => {
@@ -59,6 +60,7 @@ function getMovies(searchVal) {
     })
 }
 
+// Seçilen filmin modalda açılması
 function selectMovie(id) {
     axios.get("http://www.omdbapi.com?i=" + id + "&plot=full" + "&apikey=63f944af")
     .then((response) => {
@@ -91,25 +93,28 @@ function selectMovie(id) {
             </div>
         `;
 
-        // function progressBar() {
-        //     if(${movie.imdbRating} > 0 && ${movie.imdbRating} < 5) {
-        //         $(".progress").addClass("twenty")
-        //     }
-        // }
-
         $(output).appendTo(".container-fluid");
 
-        
-        if(imdbPuan == 0) {
-            $(".progress").addClass("none")
-        }else if(imdbPuan > 0 && imdbPuan < 5) {
-            $(".progress").addClass("fifty")
-        }else if(imdbPuan >= 5 && imdbPuan < 10) {
-            $(".progress").addClass("one-hundred")
-        }
+        // if(imdbPuan == 0) {
+        //     $(".progress").addClass("none")
+        // }else if(imdbPuan > 0 && imdbPuan < 5) {
+        //     $(".progress").addClass("fifty")
+        // }else if(imdbPuan >= 5 && imdbPuan < 10) {
+        //     $(".progress").addClass("one-hundred")
+        // }
 
+        let yuzde = Math.floor((imdbPuan*10))
+        $(".progress .status").css('width', yuzde + "%")
 
-        
+        //Burada söylemiş olduğunuz "0 Kırmızı 50 Sarı 100 Yeşil" ibaresini biraz değiştirerek 0-50 puan arası kırmızı / 50-80 puan arası sarı / 80-100 puan arsını yeşil ile gösterdim.
+
+        if(yuzde < '50') {
+            $(".progress .status").css('background-color', 'red')
+        }else if (yuzde >= '50' && yuzde < '80') {
+            $(".progress .status").css('background-color', 'yellow')
+        }else {
+            $(".progress .status").css('background-color', 'green')
+        }        
     })
 
     .catch((err) => {
@@ -131,41 +136,47 @@ function getItemFromLS() {
 
 function setItemToLS(movie) {
     items = getItemFromLS();
-    items.push(movie);
-    localStorage.setItem('items', JSON.stringify(items))
+    //localStorage da 10 film bulunması ve aynı isimde text girilmesi halinde conditiona girmeyecek
+    if(items.length <= 10 && !items.toString().includes(movie)) {
+        items.push(movie);
+        localStorage.setItem('items', JSON.stringify(items))
+    }
 }
 
+//localeStorage den silmek
 function deleteItemFromLS(text) {
     items = getItemFromLS();
-    items.forEach(function(item, index) {
-        if(item == text) {
-            items.splice(index, 1)
+    items.forEach(function(item,index){
+        if(item === text){
+            items.splice(index,1);   
         }
     });
-
-    localStorage.setItem('items', JSON.stringify(items))
+    localStorage.setItem('items',JSON.stringify(items));
 
 }
 
+//localStorage a giden bilginin ekrana basılması için gerekli elemanların oluşturulması
 function createItem(text) {
-    var htmlList = `
-        <li class="movie-item">
-            ${text}
-            <a href="#" class="delete-item float-right">
-                <i class="fas fa-times"></i>
-            </a>
-        </li>
-    `;
+    // create li
+    const li = document.createElement('li');
+    li.className = 'movie-item';
+    li.appendChild(document.createTextNode(text));
 
-    list.innerHTML += htmlList
+    // create a
+    const a = document.createElement('a');
+    a.classList = 'delete-item float-right';
+    a.setAttribute('href', '#');
+    a.innerHTML = '<i class="fas fa-times"></i>';
+
+    // add a to li
+    li.appendChild(a);
+
+    // add li to ul
+    list.appendChild(li);
 }
 
+//Oluşturulan elemanların ekrana eklemesi
 function addListItem(e) {
-    // if(input.value === "") {
-    //     alert('Please enter a movie name')
-    //     return
-    // }
-
     if(!(input.value === "")) {
         createItem(input.value);
 
@@ -182,20 +193,20 @@ function addListItem(e) {
     e.preventDefault()
 }
 
+//Son girilen filmler listesindeki eleman silinmesi
 function deleteItem(e) {
-    if(e.target.className === 'movie-item') {
-        console.log(e);
-        
-        e.target.remove();
-        deleteItemFromLS(e.target.textContent)
+    if (e.target.className === 'fas fa-times') {        
+        e.target.parentElement.parentElement.remove();
+
+        // delete item from LS
+        deleteItemFromLS(e.target.parentElement.parentElement.textContent);
     }
-
-    e.preventDefault()
+    e.preventDefault();
 }
-
-
 
 function closeModal() {
     $(".modal"). css("display", "none")
 }
+
+//Not: localstorage da bilgini saklanması film arandığında değil, filmi aradıktan sonra yukarıdaki 'Film Ara' butonuna basıp anasayfaya döndükten sonra yapılmaktadır.
 
